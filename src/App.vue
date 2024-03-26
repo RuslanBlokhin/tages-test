@@ -3,9 +3,9 @@ import MainPage from './pages/MainPage.vue';
 </script>
 
 <template>
-  <div class="container">
+  <main class="container">
     <MainPage />
-  </div>
+  </main>
 </template>
 
 <style></style>

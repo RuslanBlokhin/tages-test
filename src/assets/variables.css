@@ -1,6 +1,6 @@
 :root {
   --main-text-color: #000;
-  --gray-text-color: #888;
+  --gray-text-color: rgb(130, 130, 130);
   --primary-white-color: #fff;
   --accent-color: #eb5757;
 }
