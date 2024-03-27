@@ -86,6 +86,7 @@ const vClickOutside = {
   justify-content: space-between;
   padding: 9px 16px 10px;
   height: 40px;
+  cursor: pointer;
 }
 .select__header-icon {
   height: 24px;

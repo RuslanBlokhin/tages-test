@@ -51,10 +51,10 @@ const breadcrumbsItems = computed(
     <BreadcrumbsComponent v-for="item in breadcrumbsItems" :item="item" />
   </ul>
   <h1 class="main-title">Комплекты стеллажных систем</h1>
-  <ul class="select-block">
+  <div class="select-block">
     <BaseSelect :items="sorting" label="Сортировать по:" />
     <BaseSelect :items="materials" label="Материал" />
-  </ul>
+  </div>
   <ul class="item-list">
     <ItemCard v-for="item in items" :item="item" :key="item.id" />
   </ul>
@@ -73,5 +73,38 @@ const breadcrumbsItems = computed(
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 20px;
+}
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+  justify-content: center;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+@media screen and (min-width: 768px) {
+  .select-block {
+    margin-bottom: 41px;
+  }
+  .item-list {
+    grid-template-columns: repeat(2, 49%);
+  }
+}
+@media screen and (min-width: 1138px) {
+  .item-list {
+    max-width: 1098px;
+    grid-template-columns: repeat(3, 336px);
+  }
+  .select-block {
+    gap: 24px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .item-list {
+    max-width: none;
+    grid-template-columns: repeat(4, 336px);
+    column-gap: 48px;
+    row-gap: 40px;
+  }
 }
 </style>

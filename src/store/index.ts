@@ -6,16 +6,16 @@ export default createStore({
   state: {
     items: [...data] as Array<IItem>,
   },
-  mutations: {
-    FILTER_ITEMS(state, payload: string) {
-      //   console.log(data);
-      //   const newData = data.map(Object.values);
-    },
-    SORT_ITEMS(state, payload: string) {
-      //   console.log(data);
-      //   const newData = data.map(Object.values);
-    },
-  },
+  // mutations: {
+  //   FILTER_ITEMS(state, payload: string) {
+  //     //   console.log(data);
+  //     //   const newData = data.map(Object.values);
+  //   },
+  //   SORT_ITEMS(state, payload: string) {
+  //     //   console.log(data);
+  //     //   const newData = data.map(Object.values);
+  //   },
+  // },
   getters: {
     getItems: (state): Array<IItem> => state.items,
   },
