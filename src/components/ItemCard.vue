@@ -18,6 +18,7 @@ function createDynamicURL(url: string): string {
 
 <template>
   <li class="item-card">
+    <div v-if="props.item.price.old_price" class="item-card__promo">Скидка</div>
     <div class="item-card__image-wrapper">
       <img :src="imgURL" :alt="props.item.name" />
     </div>
@@ -26,8 +27,10 @@ function createDynamicURL(url: string): string {
       <h2 class="item-card__name">{{ props.item.name }}</h2>
       <div class="item-card__details">
         <div class="item-card__price">
-          <div class="item-card__old-price">{{ props.item.price.old_price }}₽</div>
-          <div class="item-card__current-price">{{ props.item.price.current_price }}₽</div>
+          <div v-if="props.item.price.old_price" class="item-card__old-price">
+            {{ Math.trunc(props.item.price.old_price) }}₽
+          </div>
+          <div class="item-card__current-price">{{ Math.trunc(props.item.price.current_price) }}₽</div>
         </div>
         <div class="item-card__buttons">
           <button @click="inCart = true" class="item-card__cart-btn">
@@ -65,8 +68,25 @@ function createDynamicURL(url: string): string {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
   padding: 10px 14px 10px 12px;
   border: 1px solid #eee;
+}
+.item-card__promo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 8px;
+  left: 0;
+  width: 81px;
+  height: 24px;
+  color: #fff;
+  background-color: rgb(235, 87, 87);
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 500;
 }
 .item-card__image-wrapper {
   width: 238px;
@@ -111,7 +131,5 @@ function createDynamicURL(url: string): string {
 }
 .item-card__cart-btn-img {
   width: 21px;
-}
-@media screen and (min-width: 1138px) {
 }
 </style>

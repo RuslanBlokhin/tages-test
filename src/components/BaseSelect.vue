@@ -2,16 +2,28 @@
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 import { ISelectData } from '../pages/MainPage.vue';
+import { useStore } from 'vuex';
 
-const isOptionsOpen: Ref<boolean> = ref(false);
+const store = useStore();
 
 const props = defineProps<{
   items: Array<ISelectData>;
   label: string;
+  name: string;
 }>();
 
+const isOptionsOpen: Ref<boolean> = ref(false);
+const currentOption: Ref<string | null> = ref(null);
+
 const onOptionClick = (event: Event) => {
-  console.log((event.target as HTMLInputElement).value);
+  currentOption.value = (event.target as HTMLElement).textContent;
+
+  if ((event.target as HTMLElement).id === '1')
+    store.commit(props.name === 'sorting' ? 'SORT_ITEMS' : 'FILTER_ITEMS', 1);
+  if ((event.target as HTMLElement).id === '2')
+    store.commit(props.name === 'sorting' ? 'SORT_ITEMS' : 'FILTER_ITEMS', 2);
+
+  isOptionsOpen.value = false;
 };
 
 const closeSelect = (event: Event) => {
@@ -35,7 +47,7 @@ const vClickOutside = {
     <div class="select__label">{{ props.label }}</div>
     <div class="select__wrapper">
       <div @click="isOptionsOpen = !isOptionsOpen" class="select__header">
-        <div class="select__header-text"></div>
+        <div class="select__header-text">{{ currentOption }}</div>
         <div :class="[{ active: isOptionsOpen }, 'select__header-icon']" class="select__header-icon">
           <img src="../icons/arrow.svg" alt="arrow" />
         </div>

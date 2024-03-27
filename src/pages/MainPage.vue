@@ -52,8 +52,8 @@ const breadcrumbsItems = computed(
   </ul>
   <h1 class="main-title">Комплекты стеллажных систем</h1>
   <div class="select-block">
-    <BaseSelect :items="sorting" label="Сортировать по:" />
-    <BaseSelect :items="materials" label="Материал" />
+    <BaseSelect :items="sorting" label="Сортировать по:" name="sorting" />
+    <BaseSelect :items="materials" label="Материал" name="filter" />
   </div>
   <ul class="item-list">
     <ItemCard v-for="item in items" :item="item" :key="item.id" />
