@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import type { Ref } from 'vue';
 import IItem from '../models/ItemModel';
 
@@ -14,6 +14,27 @@ const imgURL: Ref<string> = ref(createDynamicURL(props.item.image.url));
 function createDynamicURL(url: string): string {
   return new URL(url, import.meta.url).href;
 }
+
+function addToLocalStorage(event: Event) {
+  const currId: string = (event.currentTarget as HTMLElement).id;
+  const nameBtn: string = (event.currentTarget as HTMLButtonElement).name;
+  const prevIds: string | null = localStorage.getItem(nameBtn);
+
+  if (prevIds && prevIds.includes(currId)) return;
+
+  let ids: string = '';
+  prevIds ? (ids = prevIds + ' ' + currId) : (ids = currId);
+  localStorage.setItem(nameBtn, ids);
+
+  nameBtn === 'cart' ? (inCart.value = true) : (isLiked.value = true);
+}
+
+onMounted(() => {
+  const cartIds: string | null = localStorage.getItem('cart');
+  const likeIds: string | null = localStorage.getItem('like');
+  if (cartIds && cartIds.includes(props.item.id)) inCart.value = true;
+  if (likeIds && likeIds.includes(props.item.id)) isLiked.value = true;
+});
 </script>
 
 <template>
@@ -33,14 +54,14 @@ function createDynamicURL(url: string): string {
           <div class="item-card__current-price">{{ Math.trunc(props.item.price.current_price) }}₽</div>
         </div>
         <div class="item-card__buttons">
-          <button @click="inCart = true" class="item-card__cart-btn">
+          <button @click="addToLocalStorage" class="item-card__cart-btn" :id="props.item.id" name="cart">
             <img
               :src="inCart ? createDynamicURL('../icons/checked.svg') : createDynamicURL('../icons/cart.svg')"
               alt="icon"
               class="item-card__cart-btn-img"
             />
           </button>
-          <button @click="isLiked = !isLiked" class="item-card__like-btn">
+          <button @click="addToLocalStorage" class="item-card__like-btn" :id="props.item.id" name="like">
             <svg
               :class="[{ active: isLiked }, 'item-card__like-icon']"
               width="21"

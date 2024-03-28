@@ -1,6 +1,30 @@
 import { createStore } from 'vuex';
 import IItem from '../models/ItemModel';
 import data from '../data/items.json';
+import { z } from 'zod';
+
+const itemsSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  code: z.string().nullable(),
+  price: z.object({
+    old_price: z.number().nullable(),
+    current_price: z.number(),
+  }),
+  image: z.object({
+    url: z.string(),
+  }),
+  material: z.number(),
+});
+type Item = z.infer<typeof itemsSchema>;
+
+data.forEach((item: Item): void => {
+  try {
+    itemsSchema.parse(item);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 export default createStore({
   state: {
