@@ -89,6 +89,9 @@ const vClickOutside = {
   box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.2);
   z-index: 3;
 }
+.select__option {
+  cursor: pointer;
+}
 .select__option:not(:last-child) {
   margin-bottom: 10px;
 }
