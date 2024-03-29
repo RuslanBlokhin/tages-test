@@ -56,7 +56,7 @@ onMounted(() => {
         <div class="item-card__buttons">
           <button @click="addToLocalStorage" class="item-card__cart-btn" :id="props.item.id" name="cart">
             <img
-              :src="inCart ? createDynamicURL('../icons/checked.svg') : createDynamicURL('../icons/cart.svg')"
+              :src="inCart ? createDynamicURL('/icons/checked.svg') : createDynamicURL('/icons/cart.svg')"
               alt="icon"
               class="item-card__cart-btn-img"
             />

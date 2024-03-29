@@ -49,7 +49,7 @@ const vClickOutside = {
       <div @click="isOptionsOpen = !isOptionsOpen" class="select__header">
         <div class="select__header-text">{{ currentOption }}</div>
         <div :class="[{ active: isOptionsOpen }, 'select__header-icon']" class="select__header-icon">
-          <img src="../icons/arrow.svg" alt="arrow" />
+          <img src="/icons/arrow.svg" alt="arrow" />
         </div>
       </div>
       <ul v-if="isOptionsOpen" v-click-outside class="select__list">
